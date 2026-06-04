@@ -1,0 +1,4 @@
+Sitemap: https://tyyi.net/sitemap.xml
+
+User-agent: *
+Disallow:
