@@ -9,6 +9,33 @@
     --ultralight: #fffefd;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #7ab800;
+        --secondary: #a0e030;
+        --warm: #ff7030;
+        --darkest: #e0e0e0;
+        --dark: #b0b0b0;
+        --mid: #999;
+        --light: #2a2a2a;
+        --ultralight: #121212;
+    }
+
+    #map {
+        background-color: #1a1a2e;
+        border-radius: 8px;
+    }
+
+    a[title]:hover::after {
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+    }
+
+    a[title]:hover::before {
+        border-color: transparent #b0b0b0 transparent transparent;
+    }
+}
+
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
