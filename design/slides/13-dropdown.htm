@@ -1,0 +1,30 @@
+<h2>منوی کشویی</h2>
+<p class="slide-desc">منوی کشویی ساده با هاور و کلیک</p>
+<div class="dropdown-wrap slide-mb-24">
+  <a href="#" class="dropdown-trigger">خدمات</a>
+  <div class="dropdown-menu">
+    <a href="#">توسعه نرم‌افزار</a>
+    <a href="#">مشاوره فناوری</a>
+    <a href="#">پشتیبانی و نگهداری</a>
+  </div>
+</div>
+<script>
+(function() {
+  var dw = document.querySelector('.dropdown-wrap');
+  if (dw) {
+    dw.addEventListener('click', function(e) {
+      e.preventDefault();
+      var menu = this.querySelector('.dropdown-menu');
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('dropdown-menu--open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown-wrap')) {
+        dw.setAttribute('aria-expanded', 'false');
+        dw.querySelector('.dropdown-menu').classList.remove('dropdown-menu--open');
+      }
+    });
+  }
+})();
+</script>

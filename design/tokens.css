@@ -1,0 +1,160 @@
+/*
+ * design.tyyi.net — Design Token System
+ * Source: https://github.com/tayyebi/design
+ * Usage: @import url('https://design.tyyi.net/tokens.css');
+ *        (already included by style.css)
+ *
+ * This file defines the complete design token architecture.
+ * Sub-systems should only override semantic tokens (:root vars),
+ * never the fixed palette values.
+ */
+
+:root {
+  /* ── Fixed palette (actual brand colors, never change) ── */
+  --palette-forest: #174c38;
+  --palette-ember: #af231c;
+  --palette-amber: #f2b534;
+  --palette-navy: #1c39bb;
+  --palette-mint: #afc2bb;
+  --palette-blush: #dda19d;
+  --palette-cream: #fefdfc;
+  --palette-white: #ffffff;
+
+  --palette-forest-rgb: 23, 76, 56;
+  --palette-ember-rgb: 175, 35, 28;
+  --palette-amber-rgb: 242, 181, 52;
+  --palette-navy-rgb: 28, 57, 187;
+  --palette-mint-rgb: 175, 194, 187;
+  --palette-blush-rgb: 221, 161, 157;
+
+  /* ── Extended palette for UI states ── */
+  --color-burned-brown: #1a0c06;
+  --color-burned-brown-rgb: 26, 12, 6;
+
+  /* ── Status colors (semantically fixed across themes) ── */
+  --color-success: #27c93f;
+  --color-success-rgb: 39, 201, 63;
+  --color-error: var(--palette-ember);
+  --color-error-rgb: var(--palette-ember-rgb);
+  --color-warning: var(--palette-amber);
+  --color-warning-rgb: var(--palette-amber-rgb);
+  --color-info: var(--palette-navy);
+  --color-info-rgb: var(--palette-navy-rgb);
+
+  /* ── Terminal / Code ── */
+  --terminal-red: #ff5f56;
+  --terminal-amber: var(--palette-amber);
+}
+
+/* ── Light mode (default) ── */
+:root {
+  --color-primary: var(--palette-forest);
+  --color-primary-rgb: var(--palette-forest-rgb);
+  --color-secondary: var(--palette-ember);
+  --color-secondary-rgb: var(--palette-ember-rgb);
+  --color-accent: var(--palette-amber);
+  --color-accent-rgb: var(--palette-amber-rgb);
+  --color-navy: var(--palette-navy);
+  --color-mint: var(--palette-mint);
+  --color-blush: var(--palette-blush);
+  --color-surface: var(--palette-cream);
+  --color-bg: var(--palette-cream);
+  --color-text: var(--color-burned-brown);
+  --color-text-rgb: var(--color-burned-brown-rgb);
+  --color-text-muted: #6b6255;
+  --color-text-faint: #99917f;
+  --color-border: #e6e0d6;
+  --color-link: var(--palette-navy);
+  --color-link-hover: #152a8a;
+  /* Status colors for alert/dialog UI that sits on the themed surface
+     (unlike --color-success/--color-error, which stay fixed for use on
+     the always-dark terminal/code surface): these follow the theme's
+     hue-swap so "success" reads green and "error" reads red in both
+     modes, at readable contrast. */
+  --color-alert-success: var(--palette-forest);
+  --color-alert-error: var(--palette-ember);
+  /* Readable text color for the mint-tinted secondary button. */
+  --color-mint-contrast: var(--palette-forest);
+}
+
+:root:has(#theme-toggle:not(:checked)),
+body:has(header input[role="switch"]:not(:checked)) {
+  --color-primary: var(--palette-forest);
+  --color-primary-rgb: var(--palette-forest-rgb);
+  --color-secondary: var(--palette-ember);
+  --color-secondary-rgb: var(--palette-ember-rgb);
+  --color-accent: var(--palette-amber);
+  --color-accent-rgb: var(--palette-amber-rgb);
+  --color-navy: var(--palette-navy);
+  --color-mint: var(--palette-mint);
+  --color-blush: var(--palette-blush);
+  --color-surface: var(--palette-cream);
+  --color-bg: var(--palette-cream);
+  --color-text: var(--color-burned-brown);
+  --color-text-rgb: var(--color-burned-brown-rgb);
+  --color-text-muted: #6b6255;
+  --color-text-faint: #99917f;
+  --color-border: #e6e0d6;
+  --color-link: var(--palette-navy);
+  --color-link-hover: #152a8a;
+  --color-alert-success: var(--palette-forest);
+  --color-alert-error: var(--palette-ember);
+  --color-mint-contrast: var(--palette-forest);
+}
+
+/* ── Dark mode (toggle checked) ── */
+:root:has(#theme-toggle:checked),
+body:has(header input[role="switch"]:checked),
+:root.dark-theme {
+  --color-primary: var(--palette-ember);
+  --color-primary-rgb: var(--palette-ember-rgb);
+  --color-secondary: var(--palette-forest);
+  --color-secondary-rgb: var(--palette-forest-rgb);
+  --color-accent: var(--palette-amber);
+  --color-accent-rgb: var(--palette-amber-rgb);
+  --color-navy: #3a5fef;
+  --color-mint: #1a3a2e;
+  --color-blush: #3a1a18;
+  --color-surface: #1e1e1e;
+  --color-bg: #121212;
+  --color-text: #e0e0e0;
+  --color-text-rgb: 224, 224, 224;
+  --color-text-muted: #9a9a9a;
+  --color-text-faint: #6a6a6a;
+  --color-border: #333;
+  --color-link: #4a7dff;
+  --color-link-hover: #6b9aff;
+  --color-alert-success: var(--color-success);
+  --color-alert-error: var(--terminal-red);
+  --color-mint-contrast: var(--palette-cream);
+}
+
+/* ── Typography ── */
+:root {
+  --font-display: 'Lalezar', sans-serif;
+  --font-body: 'Sahel', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+
+  /* ── Spacing scale ── */
+  --space-unit: 8px;
+  --space-1: calc(var(--space-unit) * 1);
+  --space-2: calc(var(--space-unit) * 2);
+  --space-3: calc(var(--space-unit) * 3);
+  --space-4: calc(var(--space-unit) * 4);
+  --space-5: calc(var(--space-unit) * 5);
+  --space-6: calc(var(--space-unit) * 6);
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
+
+  /* ── Code theme (fixed across light/dark) ── */
+  --code-bg: #1a1a2e;
+  --code-color: #a8e6cf;
+}

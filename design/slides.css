@@ -1,0 +1,271 @@
+/*
+ * slides.css — Slide deck layout & slide page styles
+ * Only for the design.tyyi.net slide deck presentation
+ */
+
+/* ── Parent (index.html) layout ── */
+html, body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.8;
+}
+body:not(.slide-page) {
+  overflow: hidden;
+  height: 100%;
+}
+
+:root {
+  color-scheme: light;
+  accent-color: var(--color-primary);
+}
+:root.dark-theme,
+:root:has(#theme-toggle:checked) {
+  color-scheme: dark;
+}
+
+/* ── Iframe ── */
+#slide-frame {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  border: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#slide-frame.ready {
+  opacity: 1;
+}
+
+/* ── Navigation controls ── */
+[role="region"] {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  padding: 4px 8px;
+  z-index: 100;
+  font-size: 11px;
+}
+[role="region"] button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  transition: background .2s, color .2s;
+}
+[role="region"] button:hover {
+  background: color-mix(in srgb, var(--color-primary), transparent 80%);
+  color: var(--color-primary);
+}
+[role="region"] button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+[role="tablist"] {
+  display: none;
+  gap: 4px;
+  list-style: none;
+}
+[role="tablist"] li {
+  list-style: none;
+}
+[role="tab"] {
+  all: unset;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+[role="tab"][aria-selected="true"] {
+  background: var(--color-primary);
+  transform: scale(1.3);
+}
+[role="tab"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (min-width: 480px) {
+  [role="region"] {
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  [role="region"] button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+  [role="tablist"] {
+    display: flex;
+    gap: 6px;
+  }
+  [role="tab"] {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* ── Theme toggle on first slide (parent only) ── */
+#theme-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 44px;
+  height: 24px;
+  border: none;
+  background: var(--color-border);
+  border-radius: 9999px;
+  cursor: pointer;
+  position: relative;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+#theme-toggle::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: var(--palette-cream);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: auto;
+  right: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  transition: left .2s, right .2s;
+}
+#theme-toggle:checked {
+  background: var(--color-primary);
+}
+#theme-toggle:checked::before {
+  right: auto;
+  left: 2px;
+}
+#theme-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Child slide page layout ── */
+.slide-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 16px;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.8;
+  direction: rtl;
+}
+.slide-page--center {
+  align-items: center;
+  text-align: center;
+}
+
+.slide-page h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+.slide-page .slide-desc {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+.slide-page .slide-hint {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--color-text-faint);
+}
+.slide-page h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.slide-page p {
+  color: var(--color-text-muted);
+}
+
+/* ── Color swatch label/order swap ── */
+.color-grid li:nth-child(1) { order: 0; }
+.color-grid li:nth-child(2) { order: 1; }
+.color-grid li:nth-child(3) { order: 2; }
+.color-grid li:nth-child(4) { order: 3; }
+.color-grid li:nth-child(5) { order: 4; }
+.color-grid li:nth-child(6) { order: 5; }
+.color-grid li:nth-child(7) { order: 6; }
+.color-grid li:nth-child(1) figure div strong:nth-child(2),
+.color-grid li:nth-child(2) figure div strong:nth-child(2) { display: none; }
+html.dark-theme .color-grid li:nth-child(1) { order: 1; }
+html.dark-theme .color-grid li:nth-child(2) { order: 0; }
+html.dark-theme .color-grid li:nth-child(1) figure div strong:nth-child(1),
+html.dark-theme .color-grid li:nth-child(2) figure div strong:nth-child(1) { display: none; }
+html.dark-theme .color-grid li:nth-child(1) figure div strong:nth-child(2),
+html.dark-theme .color-grid li:nth-child(2) figure div strong:nth-child(2) { display: inline; }
+
+/* ── Responsive (mobile-first) ── */
+@media (min-width: 480px) {
+  .slide-page {
+    padding: 48px 24px;
+  }
+}
+
+@media (min-width: 640px) {
+  .slide-page h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 767px) {
+  [role="region"] {
+    bottom: auto;
+    top: 8px;
+    max-width: calc(100% - 16px);
+  }
+}
+
+@media (min-width: 768px) {
+  .slide-page h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  [role="region"] {
+    bottom: 24px;
+    padding: 8px 24px;
+    gap: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slide-page {
+    padding: 80px 48px;
+  }
+  .slide-page h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+}

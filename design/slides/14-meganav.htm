@@ -1,0 +1,78 @@
+<h2>مگا منو</h2>
+<p class="slide-desc">موبایل: همبرگری → پنل → آکاردئون / دسکتاپ: هاور → ستون‌ها</p>
+<nav class="mega-nav">
+  <button class="mega-nav__toggle" aria-label="منوی اصلی" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mega-nav__panel">
+    <ul class="mega-nav__list">
+      <li><a href="#" aria-current="page">خانه</a></li>
+      <li class="mega-nav__item--mega">
+        <a href="#">محصولات</a>
+        <div class="mega-nav__dropdown">
+          <div class="mega-nav__col">
+            <h4>نرم‌افزار</h4>
+            <ul>
+              <li><a href="#">پلتفرم ابری</a></li>
+              <li><a href="#">ابزار تحلیل داده</a></li>
+              <li><a href="#">سیستم مدیریت محتوا</a></li>
+            </ul>
+          </div>
+          <div class="mega-nav__col">
+            <h4>سخت‌افزار</h4>
+            <ul>
+              <li><a href="#">سرور و زیرساخت</a></li>
+              <li><a href="#">ایستگاه کاری</a></li>
+              <li><a href="#">دستگاه‌های هوشمند</a></li>
+            </ul>
+          </div>
+          <div class="mega-nav__col">
+            <h4>خدمات</h4>
+            <ul>
+              <li><a href="#">مشاوره تخصصی</a></li>
+              <li><a href="#">پیاده‌سازی</a></li>
+              <li><a href="#">پشتیبانی فنی</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a href="#">خدمات</a></li>
+      <li><a href="#">تماس</a></li>
+    </ul>
+  </div>
+</nav>
+<script>
+(function() {
+  var toggle = document.querySelector('.mega-nav__toggle');
+  var panel = document.querySelector('.mega-nav__panel');
+  function closeMenu() {
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (panel) panel.classList.remove('mega-nav__panel--open');
+  }
+  if (toggle && panel) {
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      panel.classList.toggle('mega-nav__panel--open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.mega-nav')) closeMenu();
+    });
+  }
+  var megaLinks = document.querySelectorAll('.mega-nav__item--mega > a');
+  for (var i = 0; i < megaLinks.length; i++) {
+    megaLinks[i].addEventListener('click', function(e) {
+      if (window.innerWidth < 768) {
+        e.preventDefault();
+        var li = this.parentNode;
+        var dd = li.querySelector('.mega-nav__dropdown');
+        if (dd) {
+          var open = dd.classList.toggle('mega-nav__dropdown--open');
+          this.setAttribute('aria-expanded', String(open));
+        }
+      }
+    });
+  }
+})();
+</script>

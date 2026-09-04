@@ -1,0 +1,71 @@
+<h2>دیالوگ</h2>
+<p class="slide-desc">پنجره‌های مودال و غیرمودال با انواع کاربرد</p>
+
+<div class="btn-group" style="margin-bottom:0">
+  <button class="btn--primary" id="modal-trigger">مودال معمولی</button>
+  <button class="btn--outline" id="confirm-trigger">دیالوگ تأیید</button>
+  <button class="btn--ghost" id="alert-trigger">دیالوگ هشدار</button>
+</div>
+
+<dialog id="modal-demo" class="dialog">
+  <div class="dialog-header">
+    <h3>عنوان دیالوگ</h3>
+    <button class="dialog-close" id="modal-close" aria-label="بستن">&times;</button>
+  </div>
+  <div class="dialog-body">
+    <p>محتوای اصلی دیالوگ در این بخش نمایش داده می‌شود. می‌توانید هر نوع محتوایی را در این قسمت قرار دهید.</p>
+  </div>
+  <div class="dialog-footer">
+    <button class="btn--outline" id="modal-cancel">انصراف</button>
+    <button class="btn--primary" id="modal-confirm">تأیید</button>
+  </div>
+</dialog>
+
+<dialog id="confirm-demo" class="dialog dialog--sm">
+  <div class="dialog-header">
+    <h3>تأیید عملیات</h3>
+    <button class="dialog-close" id="confirm-close" aria-label="بستن">&times;</button>
+  </div>
+  <div class="dialog-body">
+    <p>آیا از حذف این آیتم اطمینان دارید؟</p>
+    <p class="dialog-warning">این عملیات غیرقابل بازگشت است.</p>
+  </div>
+  <div class="dialog-footer">
+    <button class="btn--outline" id="confirm-no">خیر</button>
+    <button class="btn--secondary" id="confirm-yes">بله، حذف کن</button>
+  </div>
+</dialog>
+
+<dialog id="alert-demo" class="dialog dialog--sm">
+  <div class="dialog-header">
+    <h3>خطا</h3>
+    <button class="dialog-close" id="alert-close" aria-label="بستن">&times;</button>
+  </div>
+  <div class="dialog-body">
+    <p>خطایی در پردازش درخواست شما رخ داده است. لطفاً دوباره تلاش کنید.</p>
+  </div>
+  <div class="dialog-footer">
+    <button class="btn--primary" id="alert-ok">متوجه شدم</button>
+  </div>
+</dialog>
+
+<script>
+(function() {
+  function setup(id) {
+    var el = document.getElementById(id.modal);
+    var trigger = document.getElementById(id.trigger);
+    if (!el || !trigger) return;
+    trigger.addEventListener('click', function() { el.showModal(); });
+    id.close.forEach(function(cid) {
+      var btn = document.getElementById(cid);
+      if (btn) btn.addEventListener('click', function() { el.close(); });
+    });
+    el.addEventListener('click', function(e) {
+      if (e.target === el) el.close();
+    });
+  }
+  setup({ modal: 'modal-demo', trigger: 'modal-trigger', close: ['modal-close', 'modal-cancel', 'modal-confirm'] });
+  setup({ modal: 'confirm-demo', trigger: 'confirm-trigger', close: ['confirm-close', 'confirm-no', 'confirm-yes'] });
+  setup({ modal: 'alert-demo', trigger: 'alert-trigger', close: ['alert-close', 'alert-ok'] });
+})();
+</script>
