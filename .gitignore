@@ -1,0 +1,5 @@
+# Fetched by entrypoint.sh from github.com/tayyebi/serve-md, not source.
+/serve-md
+/serve-md.download.*
+
+.DS_Store

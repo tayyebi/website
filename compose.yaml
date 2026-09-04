@@ -1,0 +1,32 @@
+# No image is built. serve-md is a fully static binary, so a stock Alpine is
+# enough to run it: the binary and the mirror are both mounted in.
+services:
+  site:
+    image: alpine:3
+    container_name: tayyebi-github-io
+    ports:
+      - "8018:8000"
+    volumes:
+      # Read-only throughout: the server never writes, and --fresh picks up
+      # hand edits to the documents without needing a restart.
+      - ./serve-md:/usr/local/bin/serve-md:ro
+      - .:/docs:ro
+    # 0.0.0.0 because a container-local bind is unreachable from the host, and
+    # --no-open because there is no browser in here to open.
+    command:
+      - serve-md
+      - --host=0.0.0.0
+      - --port=8000
+      - --dir=/docs
+      - --no-open
+      # x-headers: describes the server/each document via response headers.
+      - --plugin=x-headers
+      # math: renders LaTeX math as MathML.
+      - --plugin=math
+      # mermaid: renders mermaid flowcharts as inline SVG.
+      - --plugin=mermaid
+      # webmcp: serves the mirror to AI agents at /mcp, /llms.txt and
+      # /llms-full.txt. Its search tool shells out to grep, which the
+      # Alpine image provides.
+      - --plugin=webmcp
+    restart: unless-stopped
