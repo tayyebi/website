@@ -25,15 +25,6 @@
         background-color: #1a1a2e;
         border-radius: 8px;
     }
-
-    a[title]:hover::after {
-        background-color: #2a2a2a;
-        color: #e0e0e0;
-    }
-
-    a[title]:hover::before {
-        border-color: transparent #b0b0b0 transparent transparent;
-    }
 }
 
 html {
@@ -96,24 +87,8 @@ header nav ul li {
     margin: 0.3em;
 }
 
-.flush-left {
-    float: left;
-    direction: ltr;
-    text-align: left;
-}
-
 article {
     margin: 10vh 5vw 1vh 5vw;
-}
-
-article .heading {
-    display: none;
-}
-
-article h2 {
-    color: var(--warm);
-    font-weight: 900;
-    font-size: 1.3em;
 }
 
 article {
@@ -132,51 +107,6 @@ article {
     max-width: 90vw;
     max-height: 80vw;
     overflow: auto;
-}
-
-article>.letter>p {
-    text-indent: 2em;
-    word-spacing: .3em;
-    line-height: 2em;
-    text-align: justify;
-    margin-top: 10vh;
-    margin-bottom: 10vh;
-}
-
-.opening img {
-    margin-right: 2em;
-    width: 2em;
-}
-
-.closing {
-    text-align: left;
-    margin-top: 3em;
-    margin-bottom: 1em;
-}
-
-.closing .name,
-.closing time {
-    display: block;
-}
-
-.logo {
-    padding-left: 1em;
-    width: 6vh;
-}
-
-.profile-pic {
-    width: 7vw;
-    height: 7vw;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-}
-
-.profile-pic img {
-    display: inline;
-    margin: 0 auto;
-    height: 100%;
-    width: auto;
 }
 
 address {
@@ -240,39 +170,6 @@ textarea,
 select {
     -webkit-transition: display 1s, filter 1s, width 1s, height 1s, background 1s, color 1s, font 1s, box-shadow 2s, -webkit-transform 1s, opacity 2s, border 1s;
     transition: display 1s, filter 1s, width 1s, height 1s, background 1s, color 1s, font 1s, box-shadow 2s, transform 1s, opacity 2s, border 1s;
-}
-
-/* ===== Tooltips ===== */
-
-a[title]:hover::after {
-    margin-right: .3em;
-    padding-right: .3em;
-    padding-left: .3em;
-    content: attr(title);
-    font-size: .7em;
-    background-color: var(--darkest);
-    color: var(--ultralight);
-    animation: accordion 1s forwards;
-    border-radius: .5em;
-}
-
-a[title]:hover::before {
-    margin-left: .1em;
-    display: inline-block;
-    content: " ";
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent var(--dark) transparent transparent;
-}
-
-@-webkit-keyframes accordion {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 /* ===== Bionic ===== */
