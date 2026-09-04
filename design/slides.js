@@ -76,7 +76,12 @@
   var nextBtn = document.getElementById('next');
   var toggle = document.getElementById('theme-toggle');
 
-  var baseUrl = window.location.href.replace(/index\.html$/, '');
+  // Hardcoded rather than derived from window.location: this page is always
+  // served at /design/, but some CDNs in front of GitHub Pages will serve
+  // this file's content for a trailing-slash-less /design request without
+  // redirecting to add the slash, which leaves relative URLs resolving
+  // against the wrong (parent) directory.
+  var baseUrl = '/design/';
 
   function wrapContent(bodyContent, index, isDark) {
     var cls = index === 0 ? 'slide-page slide-page--center' : 'slide-page';
@@ -90,7 +95,7 @@
 
     var isDark = toggle && toggle.checked;
 
-    fetch(slideFiles[index])
+    fetch(baseUrl + slideFiles[index])
       .then(function(r) { return r.text(); })
       .then(function(html) {
         frame.srcdoc = wrapContent(html, index, isDark);
